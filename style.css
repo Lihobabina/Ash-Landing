@@ -16,6 +16,9 @@ h3{
     font-size: 2.5rem;
     font-weight: 600;
 }
+.menu-mob{
+    display: none;
+}
 header{
     width: 100%;
     height: 55px;
@@ -24,12 +27,16 @@ header{
     justify-content: space-between;
     align-items: center;
     border-bottom: 1px solid #D1D1D1;
+    background-color: #fff;
+    position: fixed;
+    z-index: 99;
 }
 .container{
-    padding: 35px 65px 0 65px ;
-    background: url(./images/home-img.svg) no-repeat;
+    padding: 85px 0px 0 65px ;
+    overflow: hidden;
+    /* background: url(./images/home-img.svg) no-repeat;
     background-position: calc(100% - 45px) 100%;
-    background-size: 50%;
+    background-size: 50%; */
 }
 header nav{
     display: flex;
@@ -64,7 +71,7 @@ header nav > li a{
 .home > .text h1{
     font-size: 4rem;
     font-weight: 400;
-    line-height: 78.02px;
+    line-height: 60px;
 }
 .home > .text h4{
     font-weight: 600;
@@ -86,9 +93,26 @@ header nav > li a{
     display: inline-block;
     width: 1em;
 }
-.tablet-home-img{
-    display: none;
+/* .tablet-home-img{
+    width: 80%;
+} */
+.tablet-home-img {
+    width: 80%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    opacity: 0; /* Начальная прозрачность, чтобы изображение было невидимым до начала анимации */
+    transform: translateX(100%); /* Начальное положение за правой границей экрана */
+    animation: slideIn 1s forwards; /* Длительность 1 секунда, forward для сохранения состояния после анимации */
 }
+
+@keyframes slideIn {
+    to {
+        opacity: 1; /* Конечная прозрачность */
+        transform: translateX(0); /* Положение при завершении анимации, выезжает справа на лево */
+    }
+}
+
 .join-btn{
     display: block;
     width: 280px;
@@ -150,7 +174,14 @@ header nav > li a{
     color: #66BFFF;
     font-size: 1.5rem;
 }
+.studing-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
 .studing{
+    width: 85%;
     background-color: #ffffff1f;
     border-radius: 30px;
     border: 0.3px solid #D1D1D1;
@@ -227,7 +258,7 @@ header nav > li a{
     align-self: center;
 }
 .w100{
-    width: 100%;
+    width: 85%;
     margin-top: 5rem;
 }
 .questions-block{
@@ -465,6 +496,84 @@ footer > .row .col ul a img{
 .get-mob{
     display: none;
 }
+/*  */
+.hamburger-menu{
+    display: none;
+    width: 50px;
+    height: 50px;
+    position: relative;
+    z-index: 999;
+}
+.hamburger-menu span, .hamburger-menu span::before, .hamburger-menu span::after{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -1.5px;
+    margin-left: -15px;
+    width: 30px;
+    height: 3px;
+    background-color: #000000;
+}
+.hamburger-menu span::before, .hamburger-menu span::after{
+    content: '';
+    display: block;
+    transition: 0.3s;
+}
+.hamburger-menu span::before{
+    transform: translateY(-9px);
+}
+.hamburger-menu span::after{
+    transform: translateY(9px);
+}
+.hamburger-active span{
+    height: 0;
+}
+.hamburger-active span::before{
+    transform: rotate(45deg);
+}
+.hamburger-active span::after{
+    transform: rotate(-45deg);
+}
+/*  */
+.menu-mob{
+    right: 0;
+    top: 0;
+    position: absolute;
+    z-index: 999;
+    width: 100%;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 10px;
+    padding: 15px;
+    transition: 0.4s;
+    transform: translateX(100%);
+    border: 1px solid #000;
+}
+.menu-mob > li{
+    list-style: none;
+}
+.menu-mob > li a{
+    text-decoration: none;
+    color: #000000;
+    font-size: 0.9rem;
+}
+.menu-mob-active{
+    transform: translateX(0);
+}
+/*  */
+
+
+
+@media (min-width: 1370px){
+    .join-bl > .img {
+        width: 33%;
+        position: absolute;
+        top: -10%;
+        right: 15%;
+      }
+}
 @media (max-width: 1000px) {
     body{
         font-size: 1rem;
@@ -523,6 +632,12 @@ footer > .row .col ul a img{
       }
 }
 @media (max-width: 600px){
+    .menu-mob{
+        display: flex;
+    }
+    .hamburger-menu{
+        display: block;
+    }
     h3{
         font-size: 2rem;
     }
@@ -536,7 +651,10 @@ footer > .row .col ul a img{
     .rewievs, .join-us, footer, .questions{
         padding: 25px;
     }
-    .container, .bg{
+    .container{
+        padding: 65px 25px 0 25px;
+    }
+     .bg{
         padding: 25px 25px 0 25px;
     }
     .container{
@@ -550,6 +668,10 @@ footer > .row .col ul a img{
         width: 100%;
         align-self: center;
     }
+    .tablet-home-img.animate-slide-in {
+        opacity: 1;
+        transform: translateX(0);
+    }
     .home > .text h1{
         line-height: 1.2;
     }
@@ -560,7 +682,7 @@ footer > .row .col ul a img{
     .join-btn{
         align-items: center;
     }
-    .about > .row .text, .about > .row .desc, .courses > .row .bl, .swiper, .join-us > .row form, .join-us > .row form button, .telegram-bl, .swiper, footer > .row{
+    .about > .row .text, .about > .row .desc, .courses > .row .bl, .swiper, .join-us > .row form, .join-us > .row form button, .telegram-bl, .swiper, footer > .row,  .studing{
         width: 100%;
     }
     .about > .row .text{
@@ -612,6 +734,7 @@ footer > .row .col ul a img{
     .studing-blocks > .bl h5{
         font-weight: 600;
         font-size: 1.2rem;
+        margin-bottom: 1.2rem;
     }
     .studing-blocks > .bl p{
         font-weight: normal;
@@ -669,7 +792,7 @@ footer > .row .col ul a img{
         font-size: 3.5rem;
     }
     .join-bl > p{
-        width: 60%;
+        width: 55%;
     }
     .join-bl > h4{
         font-size: 1.3rem;
