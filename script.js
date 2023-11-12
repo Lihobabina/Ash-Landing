@@ -47,3 +47,29 @@ const observer = new IntersectionObserver(handleIntersection, { threshold: 1 });
 const imgElement = document.querySelector('.tablet-home-img');
 observer.observe(imgElement);
 
+///
+const form = document.getElementById('form');
+form.addEventListener('submit', formSend);
+
+async function formSend(e) {
+    e.preventDefault();
+
+    let formData = new FormData(form);
+
+    try {
+        let response = await fetch('sendmail.php', {
+            method: 'POST',
+            body: formData
+        });
+
+        if (response.ok) {
+            alert('Форма успішно відправлена');
+            form.reset();
+        } else {
+            throw new Error('Server error');
+        }
+    } catch (error) {
+        console.error('Error:', error.message);
+        alert('Error');
+    }
+}
